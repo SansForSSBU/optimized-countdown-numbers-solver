@@ -3,6 +3,8 @@ from python.src.calculation import operators, Calculation
 from python.src.state import State
 
 def solve_puzzle(state):
+    if state.target in state.numbers:
+        return state
     for idx1, n1 in enumerate(state.numbers):
         for idx2, n2 in enumerate(state.numbers):
             if idx1 == idx2:
