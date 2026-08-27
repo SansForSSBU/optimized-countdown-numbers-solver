@@ -51,7 +51,7 @@ def solve_puzzle(state):
                 new_calculations = deepcopy(state.calculations)
                 new_calculations.append(calc)
                 new_state = State(new_numbers, state.target, new_calculations)
-                if new_num == target:
+                if new_num == state.target:
                     return new_state
                 result = solve_puzzle(new_state)
                 if result:
