@@ -1,6 +1,6 @@
 import json
-from python.src.solver import solve_puzzle
-from python.src.generator import generate_puzzle
+from countdown.solver import solve_puzzle
+from countdown.generator import generate_puzzle
 
 num_examples = 100
 

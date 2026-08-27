@@ -1,4 +1,4 @@
-from python.src.state import State
+from countdown.state import State
 import random
 large_numbers = [25, 50, 75, 100]
 small_numbers = list(range(1, 11))*2

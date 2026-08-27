@@ -1,6 +1,6 @@
 from copy import deepcopy
-from python.src.calculation import operators, commutative_operators, Calculation
-from python.src.state import State
+from countdown.calculation import operators, commutative_operators, Calculation
+from countdown.state import State
 
 def solve_puzzle(state):
     if state.target in state.numbers:
