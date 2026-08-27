@@ -1,5 +1,9 @@
+import json
 from python.src.solver import solve_puzzle
 from python.src.generator import generate_puzzle
+
+num_examples = 20
+
 
 def generate_and_solve_puzzle():
     puzzle = generate_puzzle()
@@ -10,13 +14,13 @@ def generate_and_solve_puzzle():
             print(calculation.__str__())
     else:
         print("No solution found")
-        return False
-    return True
+        return puzzle, False
+    return puzzle, True
 
 if __name__ == "__main__":
-    puzzles_solved = 0
-    while True:
-        print("Puzzles solved", puzzles_solved)
-        found_solution = generate_and_solve_puzzle()
-        if found_solution:
-            puzzles_solved += 1
+    record = []
+    for i in range(num_examples):
+        puzzle, solvable = generate_and_solve_puzzle()
+        record.append((puzzle.numbers, puzzle.target, solvable))
+    with open("test_puzzles.json", "w") as f:
+        json.dump(record)

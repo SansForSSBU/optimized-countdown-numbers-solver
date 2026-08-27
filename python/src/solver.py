@@ -1,5 +1,5 @@
 from copy import deepcopy
-from python.src.calculation import operators, Calculation
+from python.src.calculation import operators, commutative_operators, Calculation
 from python.src.state import State
 
 def solve_puzzle(state):
@@ -10,6 +10,8 @@ def solve_puzzle(state):
             if idx1 == idx2:
                 continue
             for op in operators:
+                if op in commutative_operators and idx1 > idx2:
+                    continue
                 calc = Calculation(n1, op, n2)
                 new_num = calc.result()
                 if new_num is None:

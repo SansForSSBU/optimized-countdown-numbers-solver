@@ -1,5 +1,6 @@
 import operator
 
+commutative_operators = [operator.add, operator.mul]
 operators = [operator.add, operator.sub, operator.mul, operator.floordiv]
 op_str_lookup = {
     operator.add: "+",
