@@ -2,8 +2,7 @@ import json
 from python.src.solver import solve_puzzle
 from python.src.generator import generate_puzzle
 
-num_examples = 20
-
+num_examples = 100
 
 def generate_and_solve_puzzle():
     puzzle = generate_puzzle()
@@ -21,6 +20,12 @@ if __name__ == "__main__":
     record = []
     for i in range(num_examples):
         puzzle, solvable = generate_and_solve_puzzle()
-        record.append((puzzle.numbers, puzzle.target, solvable))
+        record_entry = {
+            "Numbers": puzzle.numbers, 
+            "Target": puzzle.target, 
+            "Solvable": solvable,
+        }
+        record.append(record_entry)
+
     with open("test_puzzles.json", "w") as f:
-        json.dump(record)
+        json.dump(record, f)
