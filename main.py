@@ -1,4 +1,6 @@
-from solver import solve_puzzle, State
+from solver import solve_puzzle
+from state import State
+
 numbers = [1, 2, 3, 4, 5, 6]
 target = 200
 state = State(numbers, target, [])
