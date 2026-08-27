@@ -1,5 +1,8 @@
 class State:
-    def __init__(self, numbers, target, calculations):
+    def __init__(self, numbers, target, calculations=None):
         self.numbers = numbers
         self.target = target
-        self.calculations = calculations
+        if calculations is not None:
+            self.calculations = calculations
+        else:
+            self.calculations = []
