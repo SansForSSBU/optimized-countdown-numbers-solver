@@ -7,7 +7,6 @@ op_str_lookup = {
     operator.mul: "*",
     operator.floordiv: "/"
 }
-commutative_operators = [operator.add, operator.mul]
 
 class Calculation:
     def __init__(self, n1, op, n2):
@@ -43,9 +42,6 @@ def solve_puzzle(state):
             if idx1 == idx2:
                 continue
             for op in operators:
-                if op in commutative_operators:
-                    if idx1 < idx2:
-                        continue
                 calc = Calculation(n1, op, n2)
                 new_num = calc.result()
                 if new_num is None:
