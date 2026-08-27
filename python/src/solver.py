@@ -1,6 +1,6 @@
 from copy import deepcopy
-from calculation import operators, Calculation
-from state import State
+from python.src.calculation import operators, Calculation
+from python.src.state import State
 
 def solve_puzzle(state):
     for idx1, n1 in enumerate(state.numbers):

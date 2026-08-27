@@ -1,5 +1,5 @@
-from solver import solve_puzzle
-from state import State
+from python.src.solver import solve_puzzle
+from python.src.state import State
 
 numbers = [1, 2, 3, 4, 5, 6]
 target = 200
