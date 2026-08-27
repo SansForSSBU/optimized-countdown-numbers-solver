@@ -1,10 +1,9 @@
 from python.src.solver import solve_puzzle
-from python.src.state import State
+from python.src.generator import generate_puzzle
 
-numbers = [1, 2, 3, 4, 5, 6]
-target = 200
-state = State(numbers, target)
-result = solve_puzzle(state)
+puzzle = generate_puzzle()
+print(puzzle.numbers, puzzle.target)
+result = solve_puzzle(puzzle)
 if result:
     for calculation in result.calculations:
         print(calculation.__str__())
