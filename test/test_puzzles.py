@@ -4,6 +4,7 @@ from countdown.solver import solve_puzzle
 from countdown.state import State
 
 def test_countdown_puzzles():
+    puzzle_times = {}
     with open("test/puzzles.json", "r") as f:
         records = json.load(f)
         for idx, r in enumerate(records):
@@ -15,6 +16,9 @@ def test_countdown_puzzles():
             solution = solve_puzzle(puzzle)
             after = time.time()
             elapsed = after - before
+            puzzle_times[idx] = elapsed
             print(f"Puzzle number {idx} took {elapsed} seconds")
             solved = solution is not False
             assert solvable == solved
+    with open("results.json", "w") as f:
+        json.dump(puzzle_times, f)
