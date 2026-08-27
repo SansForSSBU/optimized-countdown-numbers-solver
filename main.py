@@ -10,6 +10,13 @@ def generate_and_solve_puzzle():
             print(calculation.__str__())
     else:
         print("No solution found")
+        return False
+    return True
 
 if __name__ == "__main__":
-    generate_and_solve_puzzle()
+    puzzles_solved = 0
+    while True:
+        print("Puzzles solved", puzzles_solved)
+        found_solution = generate_and_solve_puzzle()
+        if found_solution:
+            puzzles_solved += 1
