@@ -18,7 +18,10 @@ def test_countdown_puzzles():
             elapsed = after - before
             puzzle_times[idx] = elapsed
             print(f"Puzzle number {idx} took {elapsed} seconds")
-            solved = solution is not False
+            solved = solution.best == solution.target
             assert solvable == solved
     with open("results.json", "w") as f:
         json.dump(puzzle_times, f)
+
+if __name__ == "__main__":
+    test_countdown_puzzles()
