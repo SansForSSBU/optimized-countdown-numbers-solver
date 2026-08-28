@@ -29,6 +29,6 @@ def solve_puzzle(state):
                 result = solve_puzzle(new_state)
                 if result.best == result.target:
                     return result
-                if abs(result.target - result.best) < (best_state.target - best_state.best):
+                if abs(result.target - result.best) < abs(best_state.target - best_state.best):
                     best_state = result
     return best_state
