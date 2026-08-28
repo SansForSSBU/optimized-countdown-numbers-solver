@@ -7,13 +7,8 @@ def solve_puzzle(numbers, target):
     if target in numbers:
         return (target, ())
     best_num, best_steps = solve_puzzle_recursive(tuple(numbers), target)
-    # To preserve the spirit of the challenge, we clear the LRU cache.
-    # If we were allowed to store pre-computed data between runs
-    # we could just pre-compute every game and solve the problem in O(1) time
-    solve_puzzle_recursive.cache_clear()
     return best_num, best_steps
 
-@functools.lru_cache
 def solve_puzzle_recursive(numbers, target):
     best_num = 0
     best_steps = ()        
