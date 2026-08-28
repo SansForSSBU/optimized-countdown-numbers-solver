@@ -6,7 +6,7 @@ class State:
         if calculations is not None:
             self.calculations = calculations
         else:
-            self.calculations = []
+            self.calculations = ()
 
     def recompute_best(self):
         self.best = 0

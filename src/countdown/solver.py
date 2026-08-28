@@ -1,4 +1,3 @@
-from copy import deepcopy
 from countdown.calculation import operators, commutative_operators, Calculation
 from countdown.state import State
 import itertools
@@ -20,8 +19,7 @@ def solve_puzzle(state):
                 continue
             new_numbers = [n for idx, n in enumerate(state.numbers) if idx not in [idx1, idx2]]
             new_numbers.append(new_num)
-            new_calculations = deepcopy(state.calculations)
-            new_calculations.append(calc)
+            new_calculations = state.calculations + (calc,)
             new_state = State(new_numbers, state.target, new_calculations)
             new_state.recompute_best()
             if new_num == state.target:
