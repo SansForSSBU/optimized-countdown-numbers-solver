@@ -1,4 +1,4 @@
-from countdown.calculation import operators, commutative_operators, Calculation
+from countdown.calculation import operators, commutative_operators, calculate, encode_calculation, decode_calculation
 from countdown.state import State
 import itertools
 
@@ -7,14 +7,14 @@ def solve_puzzle(state):
     best_state = state
     if state.target in state.numbers:
         return state
-    for op in operators:
+    for op_idx, op in enumerate(operators):
         if op in commutative_operators:
             space = itertools.combinations(enumerate(state.numbers), 2)
         else:
             space = itertools.permutations(enumerate(state.numbers), 2)
         for (idx1, n1), (idx2, n2) in space:
-            calc = Calculation(n1, op, n2)
-            new_num = calc.result()
+            new_num = calculate(n1, op_idx, n2)
+            calc = encode_calculation(idx1, op_idx, idx2)
             if new_num is None:
                 continue
             new_numbers = [n for idx, n in enumerate(state.numbers) if idx != idx1 and idx != idx2]
