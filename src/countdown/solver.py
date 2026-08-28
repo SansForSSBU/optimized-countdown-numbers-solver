@@ -2,8 +2,15 @@ from countdown.calculation import operators, commutative_operators, calculate, e
 from countdown.state import State
 import itertools
 
-def solve_puzzle(state):
+def solve_puzzle(state, curr_best_num=None):
     state.recompute_best()
+    if curr_best_num is None:
+        best_num = 0
+        for num in state.numbers:
+            if abs(state.target - num) < abs(state.target - best_num):
+                best_num = num
+    else:
+        best_num = curr_best_num
     best_state = state
     best_steps = ()
     if state.target in state.numbers:
@@ -24,7 +31,7 @@ def solve_puzzle(state):
             new_state.recompute_best()
             if new_num == state.target:
                 return (new_state, (step,))
-            (result, steps) = solve_puzzle(new_state)
+            (result, steps) = solve_puzzle(new_state, curr_best_num=best_num)
             if result.best == result.target:
                 return (result, (step,) + steps)
             if abs(result.target - result.best) < abs(best_state.target - best_state.best):
