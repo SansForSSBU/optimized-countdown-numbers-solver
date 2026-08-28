@@ -21,7 +21,7 @@ def test_countdown_puzzles():
             calculations = [Calculation.from_encoded(step) for step in steps]
             puzzle.show_working(calculations)
             print(f"Puzzle number {idx} took {elapsed} seconds")
-            #assert difference == abs(solution.target - solution.best)
+            assert difference == abs(puzzle.target - best_num)
     with open("performance_logs/results.json", "w") as f:
         json.dump(puzzle_times, f)
 
