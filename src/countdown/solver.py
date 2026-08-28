@@ -1,17 +1,13 @@
 from countdown.calculation import operators, commutative_operators, calculate, encode_calculation, decode_calculation
 from countdown.state import State
 import itertools
+def solve_puzzle(numbers, target):
+    if target in numbers:
+        return (target, ())
+    return solve_puzzle_recursive(numbers, target)
 
-def solve_puzzle(numbers, target, curr_best_num=None):
-    if curr_best_num is None:
-        best_num = 0
-        for num in numbers:
-            if abs(target - num) < abs(target - best_num):
-                best_num = num
-        if target in numbers:
-            return (target, ())
-    else:
-        best_num = curr_best_num
+def solve_puzzle_recursive(numbers, target):
+    best_num = 0
     best_steps = ()        
     for op_idx, op in enumerate(operators):
         if op in commutative_operators:
@@ -30,7 +26,7 @@ def solve_puzzle(numbers, target, curr_best_num=None):
 
             new_numbers = [n for idx, n in enumerate(numbers) if idx != idx1 and idx != idx2]
             new_numbers.append(new_num)
-            (result_best_num, steps) = solve_puzzle(new_numbers, target, curr_best_num=best_num)
+            (result_best_num, steps) = solve_puzzle_recursive(new_numbers, target)
             if abs(target - result_best_num) < abs(target - best_num):
                 best_num = result_best_num
                 best_steps = (encode_calculation(idx1, op_idx, idx2),) + steps
