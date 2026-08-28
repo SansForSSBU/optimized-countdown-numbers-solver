@@ -22,5 +22,5 @@ if __name__ == "__main__":
         }
         record.append(record_entry)
 
-    with open("test_puzzles.json", "w") as f:
+    with open("test/puzzles.json", "w") as f:
         json.dump(record, f)
