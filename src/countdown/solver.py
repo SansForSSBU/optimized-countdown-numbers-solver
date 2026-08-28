@@ -4,7 +4,7 @@ import itertools
 def solve_puzzle(numbers, target):
     if target in numbers:
         return (target, ())
-    return solve_puzzle_recursive(numbers, target)
+    return solve_puzzle_recursive(tuple(numbers), target)
 
 def solve_puzzle_recursive(numbers, target):
     best_num = 0
@@ -24,8 +24,7 @@ def solve_puzzle_recursive(numbers, target):
                 if best_num == target:
                     return (best_num, best_steps)
 
-            new_numbers = [n for idx, n in enumerate(numbers) if idx != idx1 and idx != idx2]
-            new_numbers.append(new_num)
+            new_numbers = tuple(n for idx, n in enumerate(numbers) if idx != idx1 and idx != idx2) + (new_num,)
             (result_best_num, steps) = solve_puzzle_recursive(new_numbers, target)
             if abs(target - result_best_num) < abs(target - best_num):
                 best_num = result_best_num
