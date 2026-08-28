@@ -14,11 +14,11 @@ def test_countdown_puzzles():
             difference = r["Difference"]
             puzzle = State(numbers, target)
             before = time.time()
-            solution = solve_puzzle(puzzle)
+            (solution, steps) = solve_puzzle(puzzle)
             after = time.time()
             elapsed = after - before
             puzzle_times[idx] = elapsed
-            calculations = [Calculation.from_encoded(c) for c in solution.calculations]
+            calculations = [Calculation.from_encoded(step) for step in steps]
             puzzle.show_working(calculations)
             print(f"Puzzle number {idx} took {elapsed} seconds")
             assert difference == abs(solution.target - solution.best)
