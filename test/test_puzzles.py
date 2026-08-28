@@ -10,7 +10,7 @@ def test_countdown_puzzles():
         for idx, r in enumerate(records):
             numbers = r["Numbers"]
             target = r["Target"]
-            solvable = r["Solvable"]
+            difference = r["Difference"]
             puzzle = State(numbers, target)
             before = time.time()
             solution = solve_puzzle(puzzle)
@@ -18,7 +18,9 @@ def test_countdown_puzzles():
             elapsed = after - before
             puzzle_times[idx] = elapsed
             print(f"Puzzle number {idx} took {elapsed} seconds")
-            solved = solution is not False
-            assert solvable == solved
-    with open("results.json", "w") as f:
+            assert difference == abs(solution.target - solution.best)
+    with open("performance_logs/results.json", "w") as f:
         json.dump(puzzle_times, f)
+
+if __name__ == "__main__":
+    test_countdown_puzzles()

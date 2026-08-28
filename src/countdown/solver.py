@@ -3,6 +3,8 @@ from countdown.calculation import operators, commutative_operators, Calculation
 from countdown.state import State
 
 def solve_puzzle(state):
+    state.recompute_best()
+    best_state = state
     if state.target in state.numbers:
         return state
     for idx1, n1 in enumerate(state.numbers):
@@ -21,9 +23,12 @@ def solve_puzzle(state):
                 new_calculations = deepcopy(state.calculations)
                 new_calculations.append(calc)
                 new_state = State(new_numbers, state.target, new_calculations)
+                new_state.recompute_best()
                 if new_num == state.target:
                     return new_state
                 result = solve_puzzle(new_state)
-                if result:
+                if result.best == result.target:
                     return result
-    return False
+                if abs(result.target - result.best) < abs(best_state.target - best_state.best):
+                    best_state = result
+    return best_state
