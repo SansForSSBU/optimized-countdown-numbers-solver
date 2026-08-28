@@ -1,5 +1,5 @@
 # optimized-countdown-numbers-solver
 
-# Functionality:
+# Project objective:
 
-Takes a standard Countdown numbers game (6 numbers, 1 target). Finds a solution which gets you as close to the solution as possible
+Program which solves the Countdown numbers game as fast as possible, but by computing solutions on-the-fly without relying on any pre-computation
