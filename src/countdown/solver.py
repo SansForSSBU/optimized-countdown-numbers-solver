@@ -17,7 +17,7 @@ def solve_puzzle(state):
             new_num = calc.result()
             if new_num is None:
                 continue
-            new_numbers = [n for idx, n in enumerate(state.numbers) if idx not in [idx1, idx2]]
+            new_numbers = [n for idx, n in enumerate(state.numbers) if idx != idx1 and idx != idx2]
             new_numbers.append(new_num)
             new_calculations = state.calculations + (calc,)
             new_state = State(new_numbers, state.target, new_calculations)
