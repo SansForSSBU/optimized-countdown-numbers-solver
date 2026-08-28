@@ -13,6 +13,10 @@ class State:
         for num in self.numbers:
             self._update_best(num)
 
+    def print_calculations(self):
+        for calculation in self.calculations:
+            print(calculation)
+
     def _update_best(self, new_num):
         if abs(self.target - self.best) > abs(self.target - new_num):
             self.best = new_num

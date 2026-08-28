@@ -19,7 +19,7 @@ def test_countdown_puzzles():
             puzzle_times[idx] = elapsed
             print(f"Puzzle number {idx} took {elapsed} seconds")
             assert difference == abs(solution.target - solution.best)
-    with open("results.json", "w") as f:
+    with open("performance_logs/results.json", "w") as f:
         json.dump(puzzle_times, f)
 
 if __name__ == "__main__":
