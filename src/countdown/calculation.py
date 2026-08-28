@@ -9,6 +9,11 @@ op_str_lookup = {
     operator.floordiv: "/"
 }
 
+# TODO: We should instead encode calculations in 1-byte.
+# First 3 bits should be idx1.
+# Second 3 bits should be idx2.
+# Third 2 bits should be operator.
+
 class Calculation:
     def __init__(self, n1, op, n2):
         self.n1 = n1
