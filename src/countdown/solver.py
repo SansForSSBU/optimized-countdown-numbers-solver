@@ -11,7 +11,6 @@ def solve_puzzle(state, curr_best_num=None):
                 best_num = num
     else:
         best_num = curr_best_num
-    best_state = state
     best_steps = ()
     if state.target in state.numbers:
         return (state.target, ())
@@ -28,10 +27,13 @@ def solve_puzzle(state, curr_best_num=None):
             new_numbers.append(new_num)
             if new_num == state.target:
                 return (new_num, (encode_calculation(idx1, op_idx, idx2),))
+            if abs(state.target - new_num) < abs(state.target - best_num):
+                best_num = new_num
+                best_steps = ()
             (result_best_num, steps) = solve_puzzle(State(new_numbers, state.target), curr_best_num=best_num)
             if result_best_num == state.target:
                 return (result_best_num, (encode_calculation(idx1, op_idx, idx2),) + steps)
-            if abs(state.target - result_best_num) < abs(best_state.target - best_state.best):
+            if abs(state.target - result_best_num) < abs(state.target - best_num):
                 best_num = result_best_num
                 best_steps = (encode_calculation(idx1, op_idx, idx2),) + steps
     return (best_num, best_steps)
