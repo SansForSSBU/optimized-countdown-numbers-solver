@@ -14,7 +14,7 @@ def test_countdown_puzzles():
             difference = r["Difference"]
             puzzle = State(numbers, target)
             before = time.time()
-            best_num, steps = solve_puzzle(puzzle)
+            best_num, steps = solve_puzzle(puzzle.numbers, puzzle.target)
             after = time.time()
             elapsed = after - before
             puzzle_times[idx] = elapsed
