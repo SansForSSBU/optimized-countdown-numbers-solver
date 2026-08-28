@@ -1,11 +1,14 @@
 from countdown.calculation import operators, commutative_operators, calculate, encode_calculation, decode_calculation
 from countdown.state import State
 import itertools
+import functools
+
 def solve_puzzle(numbers, target):
     if target in numbers:
         return (target, ())
     return solve_puzzle_recursive(tuple(numbers), target)
 
+@functools.lru_cache
 def solve_puzzle_recursive(numbers, target):
     best_num = 0
     best_steps = ()        
