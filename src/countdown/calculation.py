@@ -32,3 +32,19 @@ def decode_calculation(encoded_calculation):
     n2_idx = (encoded_calculation >> 2) & 0x7
     op_idx = encoded_calculation & 0x3
     return n1_idx, op_idx, n2_idx
+
+class Calculation:
+    def __init__(self, n1_idx, op_idx, n2_idx):
+        self.n1_idx = n1_idx
+        self.op_idx = op_idx
+        self.n2_idx = n2_idx
+
+    def from_encoded(encoded):
+        n1_idx, op_idx, n2_idx = decode_calculation(encoded)
+        return Calculation(n1_idx, op_idx, n2_idx)
+
+    def get_result(self, numbers_arr):
+        return calculate(numbers_arr[self.n1_idx], self.op_idx, numbers_arr[self.n2_idx])
+
+    def print(self, numbers_arr):
+        print(f"{numbers_arr[self.n1_idx]} {op_str_lookup[operators[self.op_idx]]} {numbers_arr[self.n2_idx]} = {self.get_result(numbers_arr)}")
