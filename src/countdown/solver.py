@@ -3,7 +3,6 @@ from countdown.state import State
 import itertools
 
 def solve_puzzle(state, curr_best_num=None):
-    state.recompute_best()
     if curr_best_num is None:
         best_num = 0
         for num in state.numbers:
@@ -23,13 +22,14 @@ def solve_puzzle(state, curr_best_num=None):
             new_num = calculate(n1, op_idx, n2)
             if new_num is None:
                 continue
-            new_numbers = [n for idx, n in enumerate(state.numbers) if idx != idx1 and idx != idx2]
-            new_numbers.append(new_num)
             if abs(state.target - new_num) < abs(state.target - best_num):
                 best_num = new_num
                 best_steps = (encode_calculation(idx1, op_idx, idx2),)
                 if best_num == state.target:
                     return (best_num, best_steps)
+
+            new_numbers = [n for idx, n in enumerate(state.numbers) if idx != idx1 and idx != idx2]
+            new_numbers.append(new_num)
             (result_best_num, steps) = solve_puzzle(State(new_numbers, state.target), curr_best_num=best_num)
             if abs(state.target - result_best_num) < abs(state.target - best_num):
                 best_num = result_best_num
