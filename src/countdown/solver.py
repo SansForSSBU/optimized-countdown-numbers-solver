@@ -64,8 +64,8 @@ def solve_puzzle_bfs(numbers, target):
             new_states, new_numbers = get_next_states(state, instructions)
             if target in new_numbers.keys():
                 return target, new_numbers[target]
-            next_states.update(new_states)
-            numbers_found.update(new_numbers)
+            next_states |= new_states
+            numbers_found |= new_numbers
         states = next_states
     for num_away in range(1, 999):
         nums_to_check = [target - num_away, target + num_away]
