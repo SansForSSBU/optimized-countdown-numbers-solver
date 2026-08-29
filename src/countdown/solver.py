@@ -7,35 +7,7 @@ def solve_puzzle(numbers, target):
     if target in numbers:
         return (target, ())
     best_num1, best_steps1 = solve_puzzle_bfs(tuple(sorted(numbers)), target)
-    #best_num2, best_steps2 = solve_puzzle_recursive(tuple(sorted(numbers)), target)
     return best_num1, best_steps1
-
-def solve_puzzle_recursive(numbers, target):
-    best_num = 0
-    best_steps = ()        
-    for op_idx, op in enumerate(operators):
-        if op in commutative_operators:
-            space = itertools.combinations(enumerate(numbers), 2)
-        else:
-            space = itertools.permutations(enumerate(numbers), 2)
-        for (idx1, n1), (idx2, n2) in space:
-            new_num = calculate(n1, op_idx, n2)
-            if new_num is None:
-                continue
-            if abs(target - new_num) < abs(target - best_num):
-                best_num = new_num
-                best_steps = (encode_calculation(idx1, op_idx, idx2),)
-                if best_num == target:
-                    return (best_num, best_steps)
-
-            new_numbers = tuple(n for idx, n in enumerate(numbers) if idx != idx1 and idx != idx2) + (new_num,)
-            (result_best_num, steps) = solve_puzzle_recursive(new_numbers, target)
-            if abs(target - result_best_num) < abs(target - best_num):
-                best_num = result_best_num
-                best_steps = (encode_calculation(idx1, op_idx, idx2),) + steps
-                if best_num == target:
-                    return (best_num, best_steps)
-    return (best_num, best_steps)
 
 def get_next_states(numbers, instructions):
     next_states = {} # lookup: state -> instructions
