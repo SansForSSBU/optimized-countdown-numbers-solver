@@ -2,6 +2,7 @@ import json
 import time
 from countdown.solver import solve_puzzle
 from countdown.state import State
+from countdown.calculation import Calculation
 
 def test_countdown_puzzles():
     puzzle_times = {}
@@ -13,12 +14,14 @@ def test_countdown_puzzles():
             difference = r["Difference"]
             puzzle = State(numbers, target)
             before = time.time()
-            solution = solve_puzzle(puzzle)
+            best_num, steps = solve_puzzle(puzzle.numbers, puzzle.target)
             after = time.time()
             elapsed = after - before
             puzzle_times[idx] = elapsed
+            calculations = [Calculation.from_encoded(step) for step in steps]
+            puzzle.show_working(calculations)
             print(f"Puzzle number {idx} took {elapsed} seconds")
-            assert difference == abs(solution.target - solution.best)
+            assert difference == abs(puzzle.target - best_num)
     with open("performance_logs/results.json", "w") as f:
         json.dump(puzzle_times, f)
 
