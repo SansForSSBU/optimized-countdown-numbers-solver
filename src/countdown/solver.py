@@ -62,10 +62,9 @@ def solve_puzzle_bfs(numbers, target):
         next_states = {}
         for state, instructions in states.items():
             new_states, new_numbers = get_next_states(state, instructions)
-            next_states.update(new_states)
             if target in new_numbers.keys():
                 return target, new_numbers[target]
-            next_states.update(next_states)
+            next_states.update(new_states)
             numbers_found.update(new_numbers)
         states = next_states
     for num_away in range(1, 999):
