@@ -6,10 +6,15 @@ import ctypes
 from typing import List
 
 lib = ctypes.CDLL("build/libcountdown.so")
+lib.solve_countdown.argtypes = [ctypes.POINTER(ctypes.c_int), ctypes.c_int]
+lib.solve_countdown.restypes = ctypes.c_int
 
 def solve_puzzle(numbers, target):
     if target in numbers:
         return (target, ())
+    arr_type = ctypes.c_int * 6
+    c_numbers = arr_type(*numbers)
+    ret = lib.solve_countdown(c_numbers, target)
     best_num1, best_steps1 = solve_puzzle_bfs(tuple(sorted(numbers)), target)
     return best_num1, best_steps1
 
