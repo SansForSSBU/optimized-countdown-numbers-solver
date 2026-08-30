@@ -2,6 +2,10 @@ from countdown.calculation import operators, commutative_operators, calculate, e
 from countdown.state import State
 import itertools
 import functools
+import ctypes
+from typing import List
+
+lib = ctypes.CDLL("build/libcountdown.so")
 
 def solve_puzzle(numbers, target):
     if target in numbers:
