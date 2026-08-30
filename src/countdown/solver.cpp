@@ -9,7 +9,7 @@ extern "C" {
             std::cout << numbers[i] << " ";
         }
         std::cout << "\n";
-        std::cout << target;
+        std::cout << target << "\n";
         return 0;
     }
 }
