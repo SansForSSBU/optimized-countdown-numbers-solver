@@ -18,10 +18,10 @@ def get_next_states(numbers, instructions):
         else:
             space = itertools.permutations(enumerate(numbers), 2)
         for (idx1, n1), (idx2, n2) in space:
-            instruction = encode_calculation(idx1, op_idx, idx2)
             new_num = calculate(n1, op_idx, n2)
             if new_num is None:
                 continue
+            instruction = encode_calculation(idx1, op_idx, idx2)
             new_numbers = tuple(n for idx, n in enumerate(numbers) if idx != idx1 and idx != idx2) + (new_num,)
             next_states[(tuple(sorted(new_numbers)))] = instructions + (instruction, )
             numbers_made[new_num] = instructions + (instruction, )
